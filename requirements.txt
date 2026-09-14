@@ -1,0 +1,4 @@
+trino
+pymongo
+python-dotenv
+pytest

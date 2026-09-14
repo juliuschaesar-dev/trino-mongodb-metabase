@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 810" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569" />
+    </marker>
+
+    <symbol id="icon-csv" viewBox="0 0 56 56">
+      <rect width="56" height="56" rx="12" fill="#16a34a" />
+      <rect x="14" y="10" width="28" height="36" rx="3" fill="#ffffff" />
+      <rect x="18" y="18" width="8" height="6" fill="#16a34a" />
+      <rect x="30" y="18" width="8" height="6" fill="#16a34a" />
+      <rect x="18" y="28" width="8" height="6" fill="#16a34a" />
+      <rect x="30" y="28" width="8" height="6" fill="#16a34a" />
+      <rect x="18" y="38" width="8" height="4" fill="#16a34a" />
+      <rect x="30" y="38" width="8" height="4" fill="#16a34a" />
+    </symbol>
+
+    <symbol id="icon-python" viewBox="0 0 56 56">
+      <rect width="56" height="56" rx="12" fill="#ffffff" stroke="#cbd5e1" />
+      <path d="M28 8c-9 0-8 4-8 4v5h8v2H14s-5 0-5 9 5 9 5 9h3v-5s0-4 4-4h8s5 0 5-5v-8s0-7-6-7zm-4 5a2 2 0 110 4 2 2 0 010-4z" fill="#3776AB" />
+      <path d="M28 48c9 0 8-4 8-4v-5h-8v-2h14s5 0 5-9-5-9-5-9h-3v5s0 4-4 4h-8s-5 0-5 5v8s0 7 6 7zm4-5a2 2 0 110-4 2 2 0 010 4z" fill="#FFD43B" />
+    </symbol>
+
+    <symbol id="icon-mongodb" viewBox="0 0 56 56">
+      <rect width="56" height="56" rx="12" fill="#ffffff" stroke="#e2e8f0" />
+      <path d="M28 6c6 8 10 16 10 24a10 10 0 01-8 10v6h-4v-6a10 10 0 01-8-10c0-8 4-16 10-24z" fill="#47A248" />
+      <path d="M28 8c2 10 2 26 0 40" stroke="#ffffff" stroke-width="1.5" fill="none" />
+    </symbol>
+
+    <symbol id="icon-trino" viewBox="0 0 56 56">
+      <rect width="56" height="56" rx="12" fill="#ffffff" stroke="#e2e8f0" />
+      <g transform="translate(18,16) rotate(-18)">
+        <ellipse cx="0" cy="-9" rx="4.6" ry="13" fill="#ffffff" stroke="#d1d5db" stroke-width="0.6" />
+        <ellipse cx="0" cy="-9" rx="2.2" ry="9.5" fill="#be185d" />
+      </g>
+      <g transform="translate(37,14) rotate(14)">
+        <ellipse cx="0" cy="-12" rx="5" ry="15" fill="#ffffff" stroke="#d1d5db" stroke-width="0.6" />
+        <ellipse cx="0" cy="-12" rx="2.4" ry="11" fill="#9d174d" />
+      </g>
+      <line x1="45" y1="22" x2="50" y2="15" stroke="#3f3f46" stroke-width="1.4" stroke-linecap="round" />
+      <circle cx="51" cy="13" r="2" fill="#3f3f46" />
+      <rect x="10" y="20" width="36" height="30" rx="15" fill="#3f3f46" />
+      <rect x="15" y="22" width="26" height="7" rx="2" fill="#0f0f10" />
+      <ellipse cx="28" cy="38" rx="14" ry="11.5" fill="#eef2f3" />
+      <circle cx="23" cy="37" r="1.6" fill="#111111" />
+      <circle cx="33" cy="37" r="1.6" fill="#111111" />
+      <circle cx="18.5" cy="42" r="1.8" fill="#f6c9d0" opacity="0.85" />
+      <circle cx="37.5" cy="42" r="1.8" fill="#f6c9d0" opacity="0.85" />
+      <ellipse cx="28" cy="41" rx="1.3" ry="1" fill="#111111" />
+      <path d="M24 43c1.4 1.6 6.6 1.6 8 0" stroke="#111111" stroke-width="1" fill="none" stroke-linecap="round" />
+    </symbol>
+
+    <symbol id="icon-metabase" viewBox="0 0 56 56">
+      <rect width="56" height="56" rx="12" fill="#ffffff" stroke="#e2e8f0" />
+      <circle cx="28" cy="5" r="3.2" fill="#dbeafe" />
+      <circle cx="8" cy="15" r="4.2" fill="#509EE3" />
+      <circle cx="18" cy="15" r="4.2" fill="#dbeafe" />
+      <circle cx="28" cy="15" r="4.2" fill="#dbeafe" />
+      <circle cx="38" cy="15" r="4.2" fill="#dbeafe" />
+      <circle cx="48" cy="15" r="4.2" fill="#509EE3" />
+      <circle cx="8" cy="25" r="4.2" fill="#509EE3" />
+      <circle cx="18" cy="25" r="4.2" fill="#509EE3" />
+      <circle cx="28" cy="25" r="4.2" fill="#dbeafe" />
+      <circle cx="38" cy="25" r="4.2" fill="#509EE3" />
+      <circle cx="48" cy="25" r="4.2" fill="#509EE3" />
+      <circle cx="8" cy="35" r="4.2" fill="#509EE3" />
+      <circle cx="18" cy="35" r="4.2" fill="#dbeafe" />
+      <circle cx="28" cy="35" r="4.2" fill="#509EE3" />
+      <circle cx="38" cy="35" r="4.2" fill="#dbeafe" />
+      <circle cx="48" cy="35" r="4.2" fill="#509EE3" />
+      <circle cx="8" cy="45" r="4.2" fill="#509EE3" />
+      <circle cx="18" cy="45" r="4.2" fill="#dbeafe" />
+      <circle cx="28" cy="45" r="4.2" fill="#dbeafe" />
+      <circle cx="38" cy="45" r="4.2" fill="#dbeafe" />
+      <circle cx="48" cy="45" r="4.2" fill="#509EE3" />
+      <circle cx="28" cy="55" r="3.2" fill="#dbeafe" />
+    </symbol>
+  </defs>
+
+  <rect x="0" y="0" width="900" height="810" fill="#ffffff" />
+
+  <!-- Node: CSV -->
+  <use href="#icon-csv" x="252" y="14" width="56" height="56" />
+  <text x="280" y="88" text-anchor="middle" font-size="15" font-weight="600" fill="#14532d">CSV files (data/raw/)</text>
+  <rect x="130" y="98" width="300" height="65" rx="8" fill="#eff6ff" stroke="#3b82f6" stroke-width="1.5" />
+  <text x="280" y="120" text-anchor="middle" font-size="12" fill="#334155">mst_cabang.csv &#183; mst_produk.csv</text>
+  <text x="280" y="138" text-anchor="middle" font-size="12" fill="#334155">trans_penjualan.csv</text>
+  <text x="280" y="154" text-anchor="middle" font-size="12" fill="#334155">(delimiter ";")</text>
+
+  <!-- Arrow: CSV -> MongoDB, via Python/pymongo loader -->
+  <line x1="280" y1="163" x2="280" y2="228" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)" />
+  <use href="#icon-python" x="294" y="172" width="24" height="24" />
+  <text x="324" y="184" font-size="12" fill="#475569">scripts/load_to_mongo.py</text>
+  <text x="324" y="199" font-size="12" fill="#475569">(pymongo)</text>
+
+  <!-- Node: MongoDB (container: staging_db top + mart_db bottom, one physical instance) -->
+  <use href="#icon-mongodb" x="252" y="232" width="56" height="56" />
+  <text x="280" y="306" text-anchor="middle" font-size="15" font-weight="600" fill="#14532d">MongoDB</text>
+  <rect x="110" y="316" width="340" height="466" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5" />
+
+  <rect x="130" y="336" width="300" height="120" rx="6" fill="#ffffff" stroke="#16a34a" stroke-width="1.2" />
+  <text x="280" y="359" text-anchor="middle" font-size="13" font-weight="600" fill="#14532d">staging_db</text>
+  <text x="280" y="381" text-anchor="middle" font-size="12" fill="#334155">mst_cabang</text>
+  <text x="280" y="399" text-anchor="middle" font-size="12" fill="#334155">mst_produk</text>
+  <text x="280" y="417" text-anchor="middle" font-size="12" fill="#334155">trans_penjualan</text>
+
+  <rect x="130" y="472" width="300" height="290" rx="6" fill="#ffffff" stroke="#16a34a" stroke-width="1.2" />
+  <text x="280" y="495" text-anchor="middle" font-size="13" font-weight="600" fill="#14532d">mart_db</text>
+  <text x="280" y="517" text-anchor="middle" font-size="12" fill="#334155">dim_cabang</text>
+  <text x="280" y="536" text-anchor="middle" font-size="12" fill="#334155">dim_produk</text>
+  <text x="280" y="555" text-anchor="middle" font-size="12" fill="#334155">fact_penjualan</text>
+  <text x="280" y="574" text-anchor="middle" font-size="12" fill="#334155">agg_penjualan_harian</text>
+  <text x="280" y="593" text-anchor="middle" font-size="12" fill="#334155">agg_penjualan_per_cabang</text>
+  <text x="280" y="612" text-anchor="middle" font-size="12" fill="#334155">agg_penjualan_per_kategori</text>
+  <text x="280" y="631" text-anchor="middle" font-size="12" fill="#334155">agg_penjualan_per_produk</text>
+
+  <!-- Trino: sits beside MongoDB, reads staging_db and writes (CTAS) into mart_db -->
+  <use href="#icon-trino" x="690" y="380" width="56" height="56" />
+  <text x="718" y="452" text-anchor="middle" font-size="15" font-weight="600" fill="#831843">Trino</text>
+  <rect x="610" y="462" width="220" height="60" rx="8" fill="#fdf2f8" stroke="#db2777" stroke-width="1.5" />
+  <text x="720" y="484" text-anchor="middle" font-size="12" fill="#334155">scripts/run_transform.py</text>
+  <text x="720" y="502" text-anchor="middle" font-size="12" fill="#334155">catalog: mongodb</text>
+
+  <!-- Arrow A: staging_db -> Trino (read) -->
+  <line x1="430" y1="386" x2="610" y2="386" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)" />
+  <text x="520" y="376" text-anchor="middle" font-size="11" fill="#475569">SELECT staging_db</text>
+
+  <!-- Arrow B: Trino -> mart_db (write, CTAS) -->
+  <line x1="610" y1="520" x2="430" y2="520" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)" />
+  <text x="520" y="510" text-anchor="middle" font-size="11" fill="#475569">CTAS mart_db</text>
+
+  <!-- Node: Metabase (queries mart_db via Trino) -->
+  <use href="#icon-metabase" x="690" y="570" width="56" height="56" />
+  <text x="718" y="642" text-anchor="middle" font-size="15" font-weight="600" fill="#78350f">Metabase</text>
+  <rect x="610" y="652" width="220" height="50" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="1.5" />
+  <text x="720" y="682" text-anchor="middle" font-size="12" fill="#334155">dashboard</text>
+
+  <!-- Arrow: Trino -> Metabase -->
+  <line x1="718" y1="522" x2="718" y2="570" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)" />
+  <text x="742" y="547" font-size="11" fill="#475569">Starburst/Trino driver,</text>
+  <text x="742" y="561" font-size="11" fill="#475569">schema=mart_db</text>
+</svg>
