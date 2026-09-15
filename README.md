@@ -53,6 +53,10 @@ Metabase only connects to the `dm_db` schema — see [metabase/README.md](metaba
    python pipeline/datawarehouse.py
    python pipeline/datamart.py
    ```
+   Or run all three in one go:
+   ```bash
+   python pipeline/staging.py && python pipeline/datawarehouse.py && python pipeline/datamart.py
+   ```
 
 4. Connect Metabase to Trino and build the dashboard (see
    [metabase/README.md](metabase/README.md)).
