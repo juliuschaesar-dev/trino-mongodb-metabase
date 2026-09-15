@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 810" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 1010" font-family="-apple-system, Segoe UI, Helvetica, Arial, sans-serif">
   <defs>
     <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
       <path d="M 0 0 L 10 5 L 0 10 z" fill="#475569" />
@@ -77,7 +77,7 @@
     </symbol>
   </defs>
 
-  <rect x="0" y="0" width="900" height="810" fill="#ffffff" />
+  <rect x="0" y="0" width="640" height="1010" fill="#ffffff" />
 
   <!-- Node: CSV -->
   <use href="#icon-csv" x="252" y="14" width="56" height="56" />
@@ -87,56 +87,58 @@
   <text x="280" y="138" text-anchor="middle" font-size="12" fill="#334155">trans_penjualan.csv</text>
   <text x="280" y="154" text-anchor="middle" font-size="12" fill="#334155">(delimiter ";")</text>
 
-  <!-- Arrow: CSV -> MongoDB, via Python/pymongo loader -->
-  <line x1="280" y1="163" x2="280" y2="228" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)" />
+  <!-- Arrow: CSV -> MongoDB stg_db, via Python/pymongo loader -->
+  <line x1="280" y1="163" x2="280" y2="222" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)" />
   <use href="#icon-python" x="294" y="172" width="24" height="24" />
-  <text x="324" y="184" font-size="12" fill="#475569">scripts/load_to_mongo.py</text>
+  <text x="324" y="184" font-size="12" fill="#475569">pipeline/staging.py</text>
   <text x="324" y="199" font-size="12" fill="#475569">(pymongo)</text>
 
-  <!-- Node: MongoDB (container: staging_db top + mart_db bottom, one physical instance) -->
-  <use href="#icon-mongodb" x="252" y="232" width="56" height="56" />
-  <text x="280" y="306" text-anchor="middle" font-size="15" font-weight="600" fill="#14532d">MongoDB</text>
-  <rect x="110" y="316" width="340" height="466" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5" />
+  <!-- Node: MongoDB (one physical instance, 3 logical layers stacked) -->
+  <use href="#icon-mongodb" x="252" y="226" width="56" height="56" />
+  <text x="280" y="300" text-anchor="middle" font-size="15" font-weight="600" fill="#14532d">MongoDB</text>
+  <rect x="110" y="314" width="340" height="480" rx="8" fill="#f0fdf4" stroke="#16a34a" stroke-width="1.5" />
 
-  <rect x="130" y="336" width="300" height="120" rx="6" fill="#ffffff" stroke="#16a34a" stroke-width="1.2" />
-  <text x="280" y="359" text-anchor="middle" font-size="13" font-weight="600" fill="#14532d">staging_db</text>
-  <text x="280" y="381" text-anchor="middle" font-size="12" fill="#334155">mst_cabang</text>
-  <text x="280" y="399" text-anchor="middle" font-size="12" fill="#334155">mst_produk</text>
-  <text x="280" y="417" text-anchor="middle" font-size="12" fill="#334155">trans_penjualan</text>
+  <!-- stg_db (staging layer) -->
+  <rect x="130" y="330" width="300" height="112" rx="6" fill="#ffffff" stroke="#16a34a" stroke-width="1.2" />
+  <text x="280" y="353" text-anchor="middle" font-size="13" font-weight="600" fill="#14532d">stg_db</text>
+  <text x="280" y="375" text-anchor="middle" font-size="12" fill="#334155">stg_mst_cabang</text>
+  <text x="280" y="393" text-anchor="middle" font-size="12" fill="#334155">stg_mst_produk</text>
+  <text x="280" y="411" text-anchor="middle" font-size="12" fill="#334155">stg_trans_penjualan</text>
 
-  <rect x="130" y="472" width="300" height="290" rx="6" fill="#ffffff" stroke="#16a34a" stroke-width="1.2" />
-  <text x="280" y="495" text-anchor="middle" font-size="13" font-weight="600" fill="#14532d">mart_db</text>
-  <text x="280" y="517" text-anchor="middle" font-size="12" fill="#334155">dim_cabang</text>
-  <text x="280" y="536" text-anchor="middle" font-size="12" fill="#334155">dim_produk</text>
-  <text x="280" y="555" text-anchor="middle" font-size="12" fill="#334155">fact_penjualan</text>
-  <text x="280" y="574" text-anchor="middle" font-size="12" fill="#334155">agg_penjualan_harian</text>
-  <text x="280" y="593" text-anchor="middle" font-size="12" fill="#334155">agg_penjualan_per_cabang</text>
-  <text x="280" y="612" text-anchor="middle" font-size="12" fill="#334155">agg_penjualan_per_kategori</text>
-  <text x="280" y="631" text-anchor="middle" font-size="12" fill="#334155">agg_penjualan_per_produk</text>
+  <!-- Bridge 1: Trino reads stg_db, CTAS into dwh_db (pipeline/datawarehouse.py) -->
+  <line x1="280" y1="442" x2="280" y2="488" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)" />
+  <use href="#icon-trino" x="268" y="448" width="24" height="24" />
+  <text x="300" y="464" font-size="10" fill="#475569">datawarehouse.py</text>
 
-  <!-- Trino: sits beside MongoDB, reads staging_db and writes (CTAS) into mart_db -->
-  <use href="#icon-trino" x="690" y="380" width="56" height="56" />
-  <text x="718" y="452" text-anchor="middle" font-size="15" font-weight="600" fill="#831843">Trino</text>
-  <rect x="610" y="462" width="220" height="60" rx="8" fill="#fdf2f8" stroke="#db2777" stroke-width="1.5" />
-  <text x="720" y="484" text-anchor="middle" font-size="12" fill="#334155">scripts/run_transform.py</text>
-  <text x="720" y="502" text-anchor="middle" font-size="12" fill="#334155">catalog: mongodb</text>
+  <!-- dwh_db (warehouse layer: dim + fact) -->
+  <rect x="130" y="488" width="300" height="112" rx="6" fill="#ffffff" stroke="#16a34a" stroke-width="1.2" />
+  <text x="280" y="511" text-anchor="middle" font-size="13" font-weight="600" fill="#14532d">dwh_db</text>
+  <text x="280" y="533" text-anchor="middle" font-size="12" fill="#334155">dim_cabang</text>
+  <text x="280" y="551" text-anchor="middle" font-size="12" fill="#334155">dim_produk</text>
+  <text x="280" y="569" text-anchor="middle" font-size="12" fill="#334155">fact_penjualan</text>
 
-  <!-- Arrow A: staging_db -> Trino (read) -->
-  <line x1="430" y1="386" x2="610" y2="386" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)" />
-  <text x="520" y="376" text-anchor="middle" font-size="11" fill="#475569">SELECT staging_db</text>
+  <!-- Bridge 2: Trino reads dwh_db, CTAS into dm_db (pipeline/datamart.py) -->
+  <line x1="280" y1="600" x2="280" y2="646" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)" />
+  <use href="#icon-trino" x="268" y="606" width="24" height="24" />
+  <text x="300" y="622" font-size="10" fill="#475569">datamart.py</text>
 
-  <!-- Arrow B: Trino -> mart_db (write, CTAS) -->
-  <line x1="610" y1="520" x2="430" y2="520" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)" />
-  <text x="520" y="510" text-anchor="middle" font-size="11" fill="#475569">CTAS mart_db</text>
+  <!-- dm_db (datamart layer) -->
+  <rect x="130" y="646" width="300" height="132" rx="6" fill="#ffffff" stroke="#16a34a" stroke-width="1.2" />
+  <text x="280" y="669" text-anchor="middle" font-size="13" font-weight="600" fill="#14532d">dm_db</text>
+  <text x="280" y="691" text-anchor="middle" font-size="12" fill="#334155">dm_penjualan_harian</text>
+  <text x="280" y="709" text-anchor="middle" font-size="12" fill="#334155">dm_penjualan_per_cabang</text>
+  <text x="280" y="727" text-anchor="middle" font-size="12" fill="#334155">dm_penjualan_per_kategori</text>
+  <text x="280" y="745" text-anchor="middle" font-size="12" fill="#334155">dm_penjualan_per_produk</text>
 
-  <!-- Node: Metabase (queries mart_db via Trino) -->
-  <use href="#icon-metabase" x="690" y="570" width="56" height="56" />
-  <text x="718" y="642" text-anchor="middle" font-size="15" font-weight="600" fill="#78350f">Metabase</text>
-  <rect x="610" y="652" width="220" height="50" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="1.5" />
-  <text x="720" y="682" text-anchor="middle" font-size="12" fill="#334155">dashboard</text>
+  <!-- Arrow: dm_db -> Metabase, via Trino (query only, schema filter = dm_db) -->
+  <line x1="280" y1="794" x2="280" y2="850" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)" />
+  <use href="#icon-trino" x="294" y="802" width="24" height="24" />
+  <text x="324" y="814" font-size="12" fill="#475569">Starburst/Trino driver,</text>
+  <text x="324" y="829" font-size="12" fill="#475569">schema=dm_db</text>
 
-  <!-- Arrow: Trino -> Metabase -->
-  <line x1="718" y1="522" x2="718" y2="570" stroke="#475569" stroke-width="1.5" marker-end="url(#arrow)" />
-  <text x="742" y="547" font-size="11" fill="#475569">Starburst/Trino driver,</text>
-  <text x="742" y="561" font-size="11" fill="#475569">schema=mart_db</text>
+  <!-- Node: Metabase -->
+  <use href="#icon-metabase" x="252" y="850" width="56" height="56" />
+  <text x="280" y="924" text-anchor="middle" font-size="15" font-weight="600" fill="#78350f">Metabase</text>
+  <rect x="130" y="938" width="300" height="50" rx="8" fill="#fffbeb" stroke="#d97706" stroke-width="1.5" />
+  <text x="280" y="968" text-anchor="middle" font-size="12" fill="#334155">dashboard</text>
 </svg>

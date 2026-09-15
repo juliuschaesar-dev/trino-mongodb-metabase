@@ -1,4 +1,6 @@
-"""Load the 3 source CSVs in data/raw/ into MongoDB staging_db, using pymongo.
+"""Load the 3 source CSVs in data/raw/ into MongoDB stg_db (staging layer), using pymongo.
+
+Each CSV file <name>.csv is loaded into collection stg_<name>, e.g. mst_cabang.csv -> stg_mst_cabang.
 
 Requires: pip install -r requirements.txt
 Reads connection details from .env (MONGO_HOST, MONGO_PORT, MONGO_USER, MONGO_PASSWORD,
@@ -38,7 +40,7 @@ def main() -> None:
 
     csv_paths = sorted(RAW_DIR.glob("*.csv"))
     for csv_path in csv_paths:
-        collection_name = csv_path.stem
+        collection_name = f"stg_{csv_path.stem}"
         rows = load_csv(csv_path)
         print(f"Loading {csv_path.name} -> {collection_name} ({len(rows)} rows)")
 

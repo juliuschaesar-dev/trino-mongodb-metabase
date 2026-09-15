@@ -1,7 +1,9 @@
 # mongodb-trino-metabase
 
 Retail sales analytics dashboard: raw CSV data loaded into MongoDB via a
-pymongo script, transformed into datamarts via Trino SQL, visualized in Metabase. Demonstrates staging -> datamart pattern on top of MongoDB, with Trino as both transform and query engine.
+pymongo script, transformed into datamarts via Trino SQL, visualized in Metabase. Demonstrates a
+3-layer staging -> warehouse -> datamart pattern on top of MongoDB, with Trino as both transform
+and query engine.
 
 ## Architecture
 
@@ -12,10 +14,20 @@ pymongo script, transformed into datamarts via Trino SQL, visualized in Metabase
 | Layer | Tool |
 |---|---|
 | Source | 3 CSV files (`mst_cabang`, `mst_produk`, `trans_penjualan`) in `data/raw/` |
-| Extract/Load | `scripts/load_to_mongo.py` (pymongo, CSV -> MongoDB `staging_db`) |
-| Database | MongoDB (`staging_db`, `mart_db`) |
-| Transform | Trino (MongoDB connector), driven by `scripts/run_transform.py` |
+| Extract/Load | `pipeline/staging.py` (pymongo, CSV -> MongoDB `stg_db`) |
+| Database | MongoDB (`stg_db` staging, `dwh_db` warehouse, `dm_db` datamart) |
+| Transform | Trino (MongoDB connector), driven by `pipeline/datawarehouse.py` and `pipeline/datamart.py` |
 | Dashboard | Metabase (Starburst/Trino driver) |
+
+## Data layers
+
+| Layer | DB (MongoDB) | Table prefix | Contents |
+|---|---|---|---|
+| Staging | `stg_db` | `stg_` | Raw CSV rows, 1:1 with source files (`stg_mst_cabang`, `stg_mst_produk`, `stg_trans_penjualan`) |
+| Warehouse | `dwh_db` | `dim_` / `fact_` | Cleaned/parsed dimensions and facts (`dim_cabang`, `dim_produk`, `fact_penjualan`) |
+| Datamart | `dm_db` | `dm_` | Pre-aggregated tables for the dashboard (`dm_penjualan_harian`, `dm_penjualan_per_cabang`, `dm_penjualan_per_kategori`, `dm_penjualan_per_produk`) |
+
+Metabase only connects to the `dm_db` schema — see [metabase/README.md](metabase/README.md).
 
 ## Setup
 
@@ -31,14 +43,15 @@ pymongo script, transformed into datamarts via Trino SQL, visualized in Metabase
    docker compose up -d
    ```
 
-3. Create a virtualenv, install dependencies, then load the CSVs into `staging_db` and run the
-   Trino transforms to build `mart_db`:
+3. Create a virtualenv, install dependencies, then run the pipeline in order: load the CSVs into
+   `stg_db`, build `dwh_db`, then build `dm_db`:
    ```bash
    python -m venv .venv
    source .venv/bin/activate   # Windows: .venv\Scripts\activate
    pip install -r requirements.txt
-   python scripts/load_to_mongo.py
-   python scripts/run_transform.py
+   python pipeline/staging.py
+   python pipeline/datawarehouse.py
+   python pipeline/datamart.py
    ```
 
 4. Connect Metabase to Trino and build the dashboard (see
@@ -46,12 +59,13 @@ pymongo script, transformed into datamarts via Trino SQL, visualized in Metabase
 
 ## Tests
 
-Unit tests cover the pure logic in `scripts/` (CSV parsing, SQL statement splitting, the Trino
-retry loop) with mocked MongoDB/Trino clients — no live services required. Same
-`requirements.txt` as Setup step 3, just a different command:
+Unit tests mirror the top-level layout — `tests/pipeline/` for `pipeline/` (CSV parsing, SQL
+statement splitting, the Trino retry loop, each script's entrypoint), `tests/trino/` for the real
+`.sql` files (parses every file and checks it reads/writes the right schema for its layer). All
+run against mocked MongoDB/Trino clients — no live services required. Uses the same
+`requirements.txt` as Setup step 3, so if you already ran that, just run:
 
 ```bash
-pip install -r requirements.txt
 pytest
 ```
 
@@ -65,14 +79,23 @@ mongodb-trino-metabase/
 ├── data/raw/                   # source CSVs
 ├── trino/
 │   ├── catalog/mongodb.properties
-│   └── transform/               # 00_..07_ numbered transform SQL, run in order
-├── scripts/
-│   ├── load_to_mongo.py        # loads data/raw/*.csv into staging_db (pymongo)
-│   └── run_transform.py        # runs every .sql file in trino/transform/
+│   └── transform/
+│       ├── datawarehouse/       # 00_..03_ numbered SQL: stg_db -> dwh_db (dim_/fact_)
+│       └── datamart/            # 00_..04_ numbered SQL: dwh_db -> dm_db (dm_)
+├── pipeline/
+│   ├── staging.py               # loads data/raw/*.csv into stg_db (pymongo)
+│   ├── datawarehouse.py         # runs trino/transform/datawarehouse/*.sql
+│   ├── datamart.py              # runs trino/transform/datamart/*.sql
+│   └── trino_utils.py           # shared Trino connect/retry/run-sql-file helpers
 ├── tests/
-│   ├── conftest.py             # puts the repo root on sys.path so tests can import scripts/
-│   ├── test_load_to_mongo.py
-│   └── test_run_transform.py
+│   ├── conftest.py             # puts the repo root on sys.path
+│   ├── pipeline/                # tests for the top-level pipeline/ folder
+│   │   ├── test_staging.py
+│   │   ├── test_trino_utils.py
+│   │   ├── test_datawarehouse.py
+│   │   └── test_datamart.py
+│   └── trino/                   # tests for the real trino/transform/*.sql files
+│       └── test_transform_files.py
 ├── metabase/README.md          # Metabase -> Trino connection + dashboard panels
 └── docs/architecture.svg
 ```
