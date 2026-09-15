@@ -103,3 +103,11 @@ mongodb-trino-metabase/
 ├── metabase/README.md          # Metabase -> Trino connection + dashboard panels
 └── docs/architecture.svg
 ```
+
+## Stopping
+
+```bash
+docker compose down
+```
+
+Use `docker compose down -v` to also remove everything, including MongoDB and Metabase data.
