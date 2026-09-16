@@ -71,6 +71,14 @@ and query engine.
    - Sync/scan the database once tables exist (i.e. after running `pipeline/datawarehouse.py`
      and `pipeline/datamart.py`).
 
+## Dashboard
+
+Reference screenshot of the built dashboard (hosted as a
+[GitHub release asset](https://github.com/juliuschaesar-dev/trino-mongodb-metabase/releases/tag/v1),
+for building your own):
+
+![Dashboard](https://github.com/juliuschaesar-dev/trino-mongodb-metabase/releases/download/v1/retail-sales-dashboard.png)
+
 ## Tests
 
 Unit tests mirror the top-level layout — `tests/pipeline/` for `pipeline/` (CSV parsing, SQL
@@ -110,8 +118,6 @@ mongodb-trino-metabase/
 │   │   └── test_datamart.py
 │   └── trino/                   # tests for the real trino/transform/*.sql files
 │       └── test_transform_files.py
-├── metabase/
-│   └── retail-sales-dashboard.png  # screenshot of the built Metabase dashboard
 └── docs/architecture.svg
 ```
 
