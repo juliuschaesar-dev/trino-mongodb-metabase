@@ -27,7 +27,6 @@ and query engine.
 | Warehouse | `dwh_db` | `dim_` / `fact_` | Cleaned/parsed dimensions and facts (`dim_cabang`, `dim_produk`, `fact_penjualan`) |
 | Datamart | `dm_db` | `dm_` | Pre-aggregated tables for the dashboard (`dm_penjualan_harian`, `dm_penjualan_per_cabang`, `dm_penjualan_per_kategori`, `dm_penjualan_per_produk`) |
 
-Metabase only connects to the `dm_db` schema — see [metabase/README.md](metabase/README.md).
 
 ## Setup
 
@@ -58,8 +57,19 @@ Metabase only connects to the `dm_db` schema — see [metabase/README.md](metaba
    python pipeline/staging.py && python pipeline/datawarehouse.py && python pipeline/datamart.py
    ```
 
-4. Connect Metabase to Trino and build the dashboard (see
-   [metabase/README.md](metabase/README.md)).
+4. Connect Metabase to Trino:
+   - Open Metabase at `http://localhost:3000` and complete first-run admin setup.
+   - **Admin settings -> Databases -> Add database**:
+     - **Database type:** Starburst / Trino (`MB_DB_TYPE=starburst` in `.env`)
+     - **Host:** `trino` (Docker Compose service name), **Port:** `8080`
+     - **Catalog:** `mongodb` (`MB_DB_CATALOG`)
+     - **Schema (schema filter, "only these"):** `dm_db` (`MB_DB_SCHEMA`) — this restricts
+       Metabase to the `dm_db` (datamart) schema only, so it **cannot** browse or query the
+       `stg_db` (staging) or `dwh_db` (warehouse) layers, even though all three live under the
+       same Trino `mongodb` catalog.
+     - **User:** value of `TRINO_USER`
+   - Sync/scan the database once tables exist (i.e. after running `pipeline/datawarehouse.py`
+     and `pipeline/datamart.py`).
 
 ## Tests
 
@@ -100,7 +110,8 @@ mongodb-trino-metabase/
 │   │   └── test_datamart.py
 │   └── trino/                   # tests for the real trino/transform/*.sql files
 │       └── test_transform_files.py
-├── metabase/README.md          # Metabase -> Trino connection + dashboard panels
+├── metabase/
+│   └── retail-sales-dashboard.png  # screenshot of the built Metabase dashboard
 └── docs/architecture.svg
 ```
 
