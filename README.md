@@ -79,10 +79,10 @@ and query engine.
 ## Dashboard
 
 Reference screenshot of the built dashboard (hosted as a
-[GitHub release asset](https://github.com/juliuschaesar-dev/trino-mongodb-metabase/releases/tag/v1),
+[GitHub release asset](https://github.com/juliuschaesar-dev/trino-mongodb-metabase/releases/tag/v2),
 for building your own):
 
-![Dashboard](https://github.com/juliuschaesar-dev/trino-mongodb-metabase/releases/download/v1/retail-sales-dashboard.png)
+![Dashboard](https://github.com/juliuschaesar-dev/trino-mongodb-metabase/releases/download/v2/retail-sales-dashboard.png)
 
 ## Tests
 
