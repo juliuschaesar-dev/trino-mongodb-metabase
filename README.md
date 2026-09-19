@@ -28,6 +28,11 @@ and query engine.
 | Datamart | `dm_db` | `dm_` | Pre-aggregated tables for the dashboard (`dm_penjualan_harian`, `dm_penjualan_per_cabang`, `dm_penjualan_per_kategori`, `dm_penjualan_per_produk`) |
 
 
+## Prerequisites
+
+- Docker + Docker Compose
+- Python 3.9+ (with `venv` and `pip`) to run the pipeline scripts and tests
+
 ## Setup
 
 1. Copy the env template and adjust if needed:
