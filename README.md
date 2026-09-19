@@ -79,7 +79,7 @@ and query engine.
 ## Dashboard
 
 Reference screenshot of the built dashboard is available as a
-[GitHub release asset](https://github.com/juliuschaesar-dev/trino-mongodb-metabase/releases/tag/v4),
+[GitHub release asset](https://github.com/juliuschaesar-dev/trino-mongodb-metabase/releases/tag/v1),
 for building your own.
 
 ## Tests
